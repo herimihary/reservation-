@@ -4,15 +4,15 @@ package com.herimihary.reservation.entity;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 /**
  *
  * @author rheri
  */
-public  class Pays {
-   private  int  id;
-   private  String nomPays;
-  private   String codePays;
+public class Pays {
+
+    private int id;
+    private String nomPays;
+    private String codePays;
 
     public int getId() {
         return id;
@@ -37,5 +37,5 @@ public  class Pays {
     public void setCodePays(String codePays) {
         this.codePays = codePays;
     }
-    
+
 }
