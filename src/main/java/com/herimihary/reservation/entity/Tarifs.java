@@ -11,10 +11,51 @@ import java.util.Date;
  * @author rheri
  */
 public class Tarifs {
-    int id;
-    double prix;
-    String typeVol;
-    Date dateDepart;
+   private int id;
+    private double prix;
+    private String typeVol;
+    private Date dateDepart;
+    private int fk_IdClasse;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public double getPrix() {
+        return prix;
+    }
+
+    public void setPrix(double prix) {
+        this.prix = prix;
+    }
+
+    public String getTypeVol() {
+        return typeVol;
+    }
+
+    public void setTypeVol(String typeVol) {
+        this.typeVol = typeVol;
+    }
+
+    public Date getDateDepart() {
+        return dateDepart;
+    }
+
+    public void setDateDepart(Date dateDepart) {
+        this.dateDepart = dateDepart;
+    }
+
+    public int getFk_IdClasse() {
+        return fk_IdClasse;
+    }
+
+    private void setFk_IdClasse(int fk_IdClasse) {
+        this.fk_IdClasse = fk_IdClasse;
+    }
     
     
 }
