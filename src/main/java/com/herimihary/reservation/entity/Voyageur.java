@@ -1,4 +1,4 @@
-
+package com.herimihary.reservation.entity;
 import java.util.Date;
 
 /*
@@ -10,11 +10,14 @@ import java.util.Date;
  *
  * @author rheri
  */
-public class Tarifs {
-    int id;
-    double prix;
-    String typeVol;
-    Date dateDepart;
+public class Voyageur {
+   public int id;
+    public String  nom;
+    public String  preNom;
+     public Date datedeNaissance;
+    public String passeport;
+    
+    
     
     
 }

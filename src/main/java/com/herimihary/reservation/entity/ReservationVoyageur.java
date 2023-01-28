@@ -1,6 +1,4 @@
-
-import java.util.Date;
-
+package com.herimihary.reservation.entity;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -10,14 +8,6 @@ import java.util.Date;
  *
  * @author rheri
  */
-public class Voyageur {
-   public int id;
-    public String  nom;
-    public String  preNom;
-     public Date datedeNaissance;
-    public String passeport;
-    
-    
-    
+public class ReservationVoyageur {
     
 }
