@@ -52,7 +52,7 @@ public class PromotionService implements IPromotionService {
 
     @Override
     public List<Promotion> getAll() {
-        String sql = "select * from pays";
+        String sql = "select * from promotion";
         List<Promotion> resp = new ArrayList<Promotion>();
         try {
             this.connection = ConnectionManager.getConnection();
@@ -86,7 +86,7 @@ public class PromotionService implements IPromotionService {
         String sql="insert into promotion(dateDebut,dateFin,remise,code) values (?,?,?,?)";
         try{
             this.connection = ConnectionManager.getConnection();
-            this.connection.setAutoCommit(false);
+//            this.connection.setAutoCommit(false);
             PreparedStatement ps = this.connection.prepareStatement(sql);
             ps.setDate(1, dateUtil.parseUtilToSqlDate(promotion.getDateDebut()));
             ps.setDate(2, dateUtil.parseUtilToSqlDate(promotion.getDateFin()));
@@ -94,7 +94,7 @@ public class PromotionService implements IPromotionService {
             ps.setString(4, promotion.getCode());
  
             if(ps.executeUpdate()>1){
-                this.connection.commit(); 
+//                this.connection.commit(); 
                 ResultSet rs = ps.getGeneratedKeys();
                 while(rs.next()){
                     promotion.setId(rs.getInt(1));
