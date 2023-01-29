@@ -15,9 +15,9 @@ private int fk_IdReservation;
 private int fK_IdPlace;
  private Boolean isActive;
 private int fK_IdClasse;
- private Double PrixNormal;
-private int Remise;
- private Double PrixAvecRemise;
+ private Double prixNormal;
+private int remise;
+ private Double prixAvecRemise;
 
     public int getId() {
         return id;
@@ -68,27 +68,27 @@ private int Remise;
     }
 
     public Double getPrixNormal() {
-        return PrixNormal;
+        return prixNormal;
     }
 
     public void setPrixNormal(Double PrixNormal) {
-        this.PrixNormal = PrixNormal;
+        this.prixNormal = PrixNormal;
     }
 
     public int getRemise() {
-        return Remise;
+        return remise;
     }
 
     public void setRemise(int Remise) {
-        this.Remise = Remise;
+        this.remise = Remise;
     }
 
     public Double getPrixAvecRemise() {
-        return PrixAvecRemise;
+        return prixAvecRemise;
     }
 
     public void setPrixAvecRemise(Double PrixAvecRemise) {
-        this.PrixAvecRemise = PrixAvecRemise;
+        this.prixAvecRemise = PrixAvecRemise;
     }
     
 }
