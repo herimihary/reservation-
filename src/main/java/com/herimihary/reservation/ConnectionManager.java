@@ -17,7 +17,14 @@ public class ConnectionManager {
     private static String urlConnection = "jdbc:postgresql://localhost:5432/reservation?user=postgres&password=herimihary";
 
     public static Connection getConnection() throws SQLException {
-        Connection con = DriverManager.getConnection(urlConnection);
+        Connection con = null;
+        try {
+            Class.forName("org.postgresql.Driver");
+            con = DriverManager.getConnection(urlConnection);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return con;
     }
 }

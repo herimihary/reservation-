@@ -6,17 +6,17 @@ import java.util.Date;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 /**
  *
  * @author rheri
  */
 public class Promotion {
-   private int  id;
-private Date dateDebut;
- private Date dateFin;
-private int remise;
- private String Code;
+
+    private int id;
+    private Date dateDebut;
+    private Date dateFin;
+    private int remise;
+    private String code;
 
     public int getId() {
         return id;
@@ -51,11 +51,11 @@ private int remise;
     }
 
     public String getCode() {
-        return Code;
+        return code;
     }
 
     public void setCode(String Code) {
-        this.Code = Code;
+        this.code = Code;
     }
-    
+
 }
