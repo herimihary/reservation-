@@ -6,73 +6,99 @@
         <link rel="stylesheet" href="css/bootstrap.css"></link> 
     </head>
     <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Airport</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link active" href="#">Reservation</a>
+                    <a class="nav-item nav-link active" href="#">Checking</a>
+                    <a class="nav-item nav-link" href="promotion/promotionList.jsp">Promotion</a>
+                    <a class="nav-item nav-link" href="#">Classe</a>
+                    <a class="nav-item nav-link" href="#">Tarifs</a>
+                    
+
+                </div>
+            </div>
+        </nav>
         <div class="container">
+
+
             <div class="row">
-                <div class="col-md-10 mark">
-                    <form>
-                        <div class="form-group row">
+
+                <div class="col-md-10 mx-auto">
+
+                    <form class="">
+                        <h1 class="mx-auto">Reservation</h1>
+                        <div class="form-group row mb-2">
                             <div class="col-sm-6">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                <label class="form-check-label" for="flexRadioDefault1">
+                                <input class="form-check-input" type="radio" name="aller" id="aller">
+                                <label class="form-check-label" for="aller">
                                     Aller simple
                                 </label>
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                <label class="form-check-label" for="flexRadioDefault1">
+                                <input class="form-check-input" type="radio" name="retour" id="retour">
+                                <label class="form-check-label" for="retour">
                                     Aller et retour
                                 </label>
                             </div>
+
+                        </div>
+                        <div class="form-group row row mb-2">
                             <div class="col-sm-6">
-                                 
+                                <label for="paysDepart">Pays de depart</label>
+                                <select class="form-control" id="paysDepart" name="paysDepart">
+                                    <option>TNR-MADAGASCAR</option>
+                                    <option>MUR-MAURICE</option>
+                                    <option>FR-FRANCE</option>
+                                    <option>SG-SINGAPORE</option>                                   
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="paysArrivee">Pays d'arrivee</label>
+                                <select class="form-control" id="paysArrivee" name="paysArrivee">
+                                    <option>TNR-MADAGASCAR</option>
+                                    <option>MUR-MAURICE</option>
+                                    <option>FR-FRANCE</option>
+                                    <option>SG-SINGAPORE</option>                                   
+                                </select>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row row mb-2">
                             <div class="col-sm-6">
-                                <label for="inputFirstname">Pays de depart</label>
-                                <input type="text" class="form-control" id="inputFirstname" placeholder="First name">
+                                <label for="dateDepart">Date depart</label>
+                                <input type="date" class="form-control" id="dateDepart" name="dateDepart" >
                             </div>
                             <div class="col-sm-6">
-                                <label for="inputLastname">Pays d'arrivee</label>
-                                <input type="text" class="form-control" id="inputLastname" placeholder="Last name">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-6">
-                                <label for="inputAddressLine1">Date depart</label>
-                                <input type="date" class="form-control" id="inputAddressLine1" >
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="inputAddressLine2">Date arrivee</label>
-                                <input type="date" class="form-control" id="inputAddressLine2" >
+                                <label for="dateArrivee">Date arrivee</label>
+                                <input type="date" class="form-control" id="dateArrivee" name="dateArrivee">
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <div class="col-sm-6">
-                                <label for="inputCity">City</label>
-                                <input type="text" class="form-control" id="inputCity" placeholder="City">
+                        <div class="form-group row row mb-2">                          
+                            <div class="col-sm-3">
+                                <label for="nbEnfant">Adulte</label>
+                                <input type="number" class="form-control" id="nbEnfant" name="nbEnfant" >
                             </div>
                             <div class="col-sm-3">
-                                <label for="inputState">State</label>
-                                <input type="text" class="form-control" id="inputState" placeholder="State">
-                            </div>
-                            <div class="col-sm-3">
-                                <label for="inputPostalCode">Postal Code</label>
-                                <input type="text" class="form-control" id="inputPostalCode" placeholder="Postal Code">
+                                <label for="nbEnfant">Enfant</label>
+                                <input type="number" class="form-control" id="nbEnfant" name ="nbEnfant" >
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row row mb-2">
                             <div class="col-sm-6">
-                                <label for="inputContactNumber">Contact Number</label>
-                                <input type="number" class="form-control" id="inputContactNumber" placeholder="Contact Number">
+                                <label for="inputContactNumber">Code Promo</label>
+                                <input type="number" class="form-control" id="inputContactNumber">
                             </div>
-                            <div class="col-sm-6">
-                                <label for="inputWebsite">Website</label>
-                                <input type="text" class="form-control" id="inputWebsite" placeholder="Website">
-                            </div>
+
                         </div>
-                        <button type="button" class="btn btn-primary px-4 float-right">Save</button>
+                        <button type="button" class="btn btn-primary mt-2 px-4 float-right">Reserver</button>
                     </form>
                 </div>
             </div>
+
+
         </div>
+
     </body>
 </html>

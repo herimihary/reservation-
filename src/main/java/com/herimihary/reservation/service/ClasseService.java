@@ -20,12 +20,13 @@ import java.util.List;
 public class ClasseService implements IClasseService {
 
     private Connection connection;
+    
 
     @Override
     public Classe getById(int id) {
         String sql="select * from classe where id=?";
         Classe resp;
-        try{
+        try{           
             this.connection = ConnectionManager.getConnection();
             PreparedStatement ps = this.connection.prepareCall(sql);
             ps.setInt(1,id);
