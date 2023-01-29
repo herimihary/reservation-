@@ -4,7 +4,13 @@
  */
 package com.herimihary.reservation.service;
 
+import com.herimihary.reservation.ConnectionManager;
 import com.herimihary.reservation.entity.Pays;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,15 +18,53 @@ import java.util.List;
  * @author rheri
  */
 public class PaysService implements IPaysService {
+     private Connection connection;
 
     @Override
     public Pays getById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        String sql="select * from pays where id=? ";
+        Pays resp;
+        try{
+            this.connection = ConnectionManager.getConnection();
+            PreparedStatement ps = this.connection.prepareCall(sql);
+            ps.setInt(1,id);
+       
+            try(ResultSet rs = ps.executeQuery()){
+                while(rs.next()){
+                    resp = new Pays();                  
+                    resp.setId(rs.getInt("id"));
+                    resp.setNomPays(rs.getString("nomPays"));
+                    resp.setCodePays(rs.getString("codePays"));
+                    return resp;
+                }
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return null;
     }
 
     @Override
     public List<Pays> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql="select * from pays";
+        List<Pays> resp= new ArrayList<Pays>();
+        try{
+            this.connection = ConnectionManager.getConnection();
+            PreparedStatement ps = this.connection.prepareCall(sql);
+            try(ResultSet rs = ps.executeQuery()){
+                while(rs.next()){
+                    Pays temp = new Pays();                  
+                    temp.setId(rs.getInt("id"));
+                    temp.setNomPays(rs.getString("nomPays"));
+                    temp.setCodePays(rs.getString("codePays"));
+                    resp.add(temp);   
+                }
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
+        return resp;
     }
 
     @Override
@@ -43,4 +87,6 @@ public class PaysService implements IPaysService {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
-}
+    }
+
+   

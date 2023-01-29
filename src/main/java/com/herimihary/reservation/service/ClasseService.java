@@ -23,7 +23,7 @@ public class ClasseService implements IClasseService {
 
     @Override
     public Classe getById(int id) {
-        String sql="select * from classe where id=?";
+        String sql="select * from classe where id=? ";
         Classe resp;
         try{
             this.connection = ConnectionManager.getConnection();
