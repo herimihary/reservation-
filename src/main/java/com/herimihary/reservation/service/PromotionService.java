@@ -7,6 +7,7 @@ package com.herimihary.reservation.service;
 import com.herimihary.reservation.ConnectionManager;
 import com.herimihary.reservation.entity.Pays;
 import com.herimihary.reservation.entity.Promotion;
+import com.herimihary.reservation.util.DateUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -81,7 +82,35 @@ public class PromotionService implements IPromotionService {
 
     @Override
     public Promotion save(Promotion promotion) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        DateUtil dateUtil = new DateUtil();
+        String sql="insert into promotion(dateDebut,dateFin,remise,code) values (?,?,?,?)";
+        try{
+            this.connection = ConnectionManager.getConnection();
+            this.connection.setAutoCommit(false);
+            PreparedStatement ps = this.connection.prepareStatement(sql);
+            ps.setDate(1, dateUtil.parseUtilToSqlDate(promotion.getDateDebut()));
+            ps.setDate(2, dateUtil.parseUtilToSqlDate(promotion.getDateFin()));
+            ps.setInt(3, promotion.getRemise());
+            ps.setString(4, promotion.getCode());
+ 
+            if(ps.executeUpdate()>1){
+                this.connection.commit(); 
+                ResultSet rs = ps.getGeneratedKeys();
+                while(rs.next()){
+                    promotion.setId(rs.getInt(1));
+                }
+            }
+        }catch(Exception e){
+             e.printStackTrace();
+            if(this.connection!=null){
+                try{
+                    this.connection.rollback();
+                }catch(Exception ex){
+                    ex.printStackTrace();
+                }
+            }
+        }
+       return promotion;
     }
 
     @Override
