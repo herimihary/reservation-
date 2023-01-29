@@ -34,14 +34,16 @@ public class ReservationService implements IReservationService {
                 while (rs.next()) {
                     resp = new Reservation();
                     resp.setId(rs.getInt("id"));
+                    resp.setTypevol(rs.getInt("typevol"));
                     resp.setArriver(rs.getDate("arriver"));
                     resp.setDepart(rs.getDate("depart"));
-                    resp.setNbVoyageur(rs.getInt("nbVoyageur"));
-                    resp.setNumVol(rs.getString("numVol"));
-                    resp.setPayArriver(rs.getString("payArriver"));
-                    resp.setPayDepart(rs.getString("payDepart"));
+                    resp.setNumVol(rs.getString("numvol"));
+                    resp.setPaysArriver(rs.getInt("payarriver"));
+                    resp.setPaysDepart(rs.getInt("paydepart"));
                     resp.setReference(rs.getString("reference"));
-                    resp.setPrixTotal(rs.getDouble("prixTotal"));
+                    resp.setNbAdulte(rs.getInt("nbadulte"));
+                    resp.setNbEnfant(rs.getInt("nbenfant"));
+                    resp.setPrixTotal(rs.getDouble("prixtotal"));
                     return resp;
                 }
             }
@@ -64,14 +66,16 @@ public class ReservationService implements IReservationService {
                 while (rs.next()) {
                     resp = new Reservation();
                     resp.setId(rs.getInt("id"));
+                    resp.setTypevol(rs.getInt("typevol"));
                     resp.setArriver(rs.getDate("arriver"));
                     resp.setDepart(rs.getDate("depart"));
-                    resp.setNbVoyageur(rs.getInt("nbVoyageur"));
-                    resp.setNumVol(rs.getString("numVol"));
-                    resp.setPayArriver(rs.getString("payArriver"));
-                    resp.setPayDepart(rs.getString("payDepart"));
+                    resp.setNumVol(rs.getString("numvol"));
+                    resp.setPaysArriver(rs.getInt("payarriver"));
+                    resp.setPaysDepart(rs.getInt("paydepart"));
                     resp.setReference(rs.getString("reference"));
-                    resp.setPrixTotal(rs.getDouble("prixTotal"));
+                    resp.setNbAdulte(rs.getInt("nbadulte"));
+                    resp.setNbEnfant(rs.getInt("nbenfant"));
+                    resp.setPrixTotal(rs.getDouble("prixtotal"));
                     return resp;
                 }
             }

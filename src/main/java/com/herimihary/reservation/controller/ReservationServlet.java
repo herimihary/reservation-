@@ -4,6 +4,9 @@
  */
 package com.herimihary.reservation.controller;
 
+import com.herimihary.reservation.entity.Reservation;
+import com.herimihary.reservation.service.ReservationService;
+import com.herimihary.reservation.util.DateUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -31,19 +34,22 @@ public class ReservationServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ReservationServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ReservationServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-       
+        DateUtil dateUtil = new DateUtil();
+        ReservationService reservationService = new ReservationService();
+        Reservation reservation = new Reservation();
+        reservation.setTypevol(Integer.parseInt(request.getParameter("typevol")));
+        reservation.setPaysDepart(Integer.parseInt(request.getParameter("paysDepart")));
+        reservation.setPaysArriver(Integer.parseInt(request.getParameter("paysArrivee")));
+        reservation.setDepart(dateUtil.parseDate(request.getParameter("dateDepart")));
+        reservation.setArriver(dateUtil.parseDate(request.getParameter("dateArrivee")));
+        reservation.setNbAdulte(Integer.parseInt(request.getParameter("nbAdulte")));
+        reservation.setNbEnfant(Integer.parseInt(request.getParameter("nbEnfant")));
+        String promoCode = request.getParameter("promocode");
+        
+        
+        reservationService.save(reservation);
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

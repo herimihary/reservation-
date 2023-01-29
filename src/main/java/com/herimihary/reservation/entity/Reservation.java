@@ -13,13 +13,47 @@ import java.util.Date;
 public class Reservation {
 
     private int id;
+    private int typevol;
     private String reference;
-    private  String numVol;
+    private String numVol;
     private Date depart;
     private Date arriver;
-    private String paysDepart;
-    private String paysArriver;
-    private int nbVoyageur;
+    private int paysDepart;
+    private int paysArriver;
+    private int nbAdulte;
+    private int nbEnfant;
+
+    public int getPaysDepart() {
+        return paysDepart;
+    }
+
+    public void setPaysDepart(int paysDepart) {
+        this.paysDepart = paysDepart;
+    }
+
+    public int getPaysArriver() {
+        return paysArriver;
+    }
+
+    public void setPaysArriver(int paysArriver) {
+        this.paysArriver = paysArriver;
+    }
+
+    public int getNbAdulte() {
+        return nbAdulte;
+    }
+
+    public void setNbAdulte(int nbAdulte) {
+        this.nbAdulte = nbAdulte;
+    }
+
+    public int getNbEnfant() {
+        return nbEnfant;
+    }
+
+    public void setNbEnfant(int nbEnfant) {
+        this.nbEnfant = nbEnfant;
+    }
     private Double prixTotal;
 
     public int getId() {
@@ -62,30 +96,6 @@ public class Reservation {
         this.arriver = arriver;
     }
 
-    public String getPayDepart() {
-        return paysDepart;
-    }
-
-    public void setPayDepart(String payDepart) {
-        this.paysDepart = payDepart;
-    }
-
-    public String getPayArriver() {
-        return paysArriver;
-    }
-
-    public void setPayArriver(String payArriver) {
-        this.paysArriver = payArriver;
-    }
-
-    public int getNbVoyageur() {
-        return nbVoyageur;
-    }
-
-    public void setNbVoyageur(int nbVoyageur) {
-        this.nbVoyageur = nbVoyageur;
-    }
-
     public Double getPrixTotal() {
         return prixTotal;
     }
@@ -93,4 +103,14 @@ public class Reservation {
     public void setPrixTotal(Double PrixTotal) {
         this.prixTotal = PrixTotal;
     }
+
+    public int getTypevol() {
+        return typevol;
+    }
+
+    public void setTypevol(int typevol) {
+        this.typevol = typevol;
+    }
+    
+    
 }
