@@ -3,8 +3,76 @@
     <head>
         <title>Start Page</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="css/bootstrap.css"></link> 
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 mark">
+                    <form>
+                        <div class="form-group row">
+                            <div class="col-sm-6">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    Aller simple
+                                </label>
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    Aller et retour
+                                </label>
+                            </div>
+                            <div class="col-sm-6">
+                                 
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6">
+                                <label for="inputFirstname">Pays de depart</label>
+                                <input type="text" class="form-control" id="inputFirstname" placeholder="First name">
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="inputLastname">Pays d'arrivee</label>
+                                <input type="text" class="form-control" id="inputLastname" placeholder="Last name">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6">
+                                <label for="inputAddressLine1">Date depart</label>
+                                <input type="date" class="form-control" id="inputAddressLine1" >
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="inputAddressLine2">Date arrivee</label>
+                                <input type="date" class="form-control" id="inputAddressLine2" >
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6">
+                                <label for="inputCity">City</label>
+                                <input type="text" class="form-control" id="inputCity" placeholder="City">
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="inputState">State</label>
+                                <input type="text" class="form-control" id="inputState" placeholder="State">
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="inputPostalCode">Postal Code</label>
+                                <input type="text" class="form-control" id="inputPostalCode" placeholder="Postal Code">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6">
+                                <label for="inputContactNumber">Contact Number</label>
+                                <input type="number" class="form-control" id="inputContactNumber" placeholder="Contact Number">
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="inputWebsite">Website</label>
+                                <input type="text" class="form-control" id="inputWebsite" placeholder="Website">
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary px-4 float-right">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
