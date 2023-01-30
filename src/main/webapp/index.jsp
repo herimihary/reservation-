@@ -33,7 +33,7 @@
                     <a class="nav-item nav-link active" href="#">Checking</a>
                     <a class="nav-item nav-link" href="promotion/promotionList.jsp">Promotion</a>
                     <a class="nav-item nav-link" href="#">Classe</a>
-                    <a class="nav-item nav-link" href="#">Tarifs</a>
+                    <a class="nav-item nav-link" href="/tarifs/tarifsList.jsp">Tarifs</a>
 
 
                 </div>

@@ -71,12 +71,11 @@ public class ReservationService implements IReservationService {
                     resp.setArriver(rs.getDate("arriver"));
                     resp.setDepart(rs.getDate("depart"));
                     resp.setNumVol(rs.getString("numvol"));
-                    resp.setPaysArriver(rs.getInt("payarriver"));
-                    resp.setPaysDepart(rs.getInt("paydepart"));
+                    resp.setPaysArriver(rs.getInt("paysarriver"));
+                    resp.setPaysDepart(rs.getInt("paysdepart"));
                     resp.setReference(rs.getString("reference"));
                     resp.setNbAdulte(rs.getInt("nbadulte"));
                     resp.setNbEnfant(rs.getInt("nbenfant"));
-                    resp.setPrixTotal(rs.getDouble("prixtotal"));
                     return resp;
                 }
             }
@@ -109,6 +108,7 @@ public class ReservationService implements IReservationService {
             ps.setInt(7, reservation.getNbAdulte());
             ps.setInt(8, reservation.getNbEnfant());
             ps.setInt(9, reservation.getTypevol());
+            
 
             if (ps.executeUpdate() > 0) {
                 ResultSet rs = ps.getGeneratedKeys();

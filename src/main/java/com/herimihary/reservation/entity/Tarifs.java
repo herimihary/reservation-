@@ -13,7 +13,7 @@ import java.util.Date;
 public class Tarifs {
    private int id;
     private double prix;
-    private String typeVol;
+    private int typeVol;
     private Date dateDepart;
     private int fk_IdClasse;
 
@@ -33,11 +33,11 @@ public class Tarifs {
         this.prix = prix;
     }
 
-    public String getTypeVol() {
+    public int getTypeVol() {
         return typeVol;
     }
 
-    public void setTypeVol(String typeVol) {
+    public void setTypeVol(int typeVol) {
         this.typeVol = typeVol;
     }
 
@@ -53,7 +53,7 @@ public class Tarifs {
         return fk_IdClasse;
     }
 
-    private void setFk_IdClasse(int fk_IdClasse) {
+    public void setFk_IdClasse(int fk_IdClasse) {
         this.fk_IdClasse = fk_IdClasse;
     }
     

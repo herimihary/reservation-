@@ -4,7 +4,10 @@
  */
 package com.herimihary.reservation.util;
 
+import com.herimihary.reservation.entity.Classe;
 import com.herimihary.reservation.entity.Pays;
+import com.herimihary.reservation.entity.Tarifs;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -32,5 +35,32 @@ public class StringUtil {
         }
         String generatedString = buffer.toString();
         return generatedString.toUpperCase();
+    }
+    
+    public static String getClasseLibelle(Tarifs tarif, List<Classe> classes){
+        String rep = "";
+        for(int i=0;i<classes.size();i++){
+            if(tarif.getFk_IdClasse()==classes.get(i).getId()){
+                rep = classes.get(i).getNom();
+            }
+        }
+        return rep;
+    }
+    
+    public static String getClasseLibelle(int idclasse, List<Classe> classes){
+        String rep = "";
+        for(int i=0;i<classes.size();i++){
+            if(idclasse==classes.get(i).getId()){
+                rep = classes.get(i).getNom();
+            }
+        }
+        return rep;
+    }
+    
+    public static String getTypeVolLibelle(int typevol){
+        if(typevol==1){
+            return "Aller";
+        }
+        return "Retour";
     }
 }

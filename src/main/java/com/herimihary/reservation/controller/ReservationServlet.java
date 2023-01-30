@@ -52,6 +52,8 @@ public class ReservationServlet extends HttpServlet {
         
         Reservation save = reservationService.save(reservation);
         
+        response.sendRedirect(request.getContextPath() + "/reservation/vol.jsp?reference="+reservation.getReference());
+        
         
     }
 

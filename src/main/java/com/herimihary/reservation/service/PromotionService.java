@@ -41,6 +41,7 @@ public class PromotionService implements IPromotionService {
                     resp.setRemise(rs.getInt("remise"));
                     resp.setDateFin(rs.getDate("datefin"));
                     resp.setDateDebut(rs.getDate("datefin"));
+                    resp.setIdclasse(rs.getInt("idclasse"));
                     return resp;
                 }
             }
@@ -65,6 +66,7 @@ public class PromotionService implements IPromotionService {
                     temp.setRemise(rs.getInt("remise"));
                     temp.setDateFin(rs.getDate("datefin"));
                     temp.setDateDebut(rs.getDate("datefin"));
+                    temp.setIdclasse(rs.getInt("idclasse"));
 
                     resp.add(temp);
                 }
@@ -83,7 +85,7 @@ public class PromotionService implements IPromotionService {
     @Override
     public Promotion save(Promotion promotion) {
         DateUtil dateUtil = new DateUtil();
-        String sql="insert into promotion(dateDebut,dateFin,remise,code) values (?,?,?,?)";
+        String sql="insert into promotion(dateDebut,dateFin,remise,code,idclasse) values (?,?,?,?,?)";
         try{
             this.connection = ConnectionManager.getConnection();
 //            this.connection.setAutoCommit(false);
@@ -92,6 +94,7 @@ public class PromotionService implements IPromotionService {
             ps.setDate(2, dateUtil.parseUtilToSqlDate(promotion.getDateFin()));
             ps.setInt(3, promotion.getRemise());
             ps.setString(4, promotion.getCode());
+            ps.setInt(5, promotion.getIdclasse());
  
             if(ps.executeUpdate()>1){
 //                this.connection.commit(); 

@@ -4,6 +4,9 @@
     Author     : rasen
 --%>
 
+<%@page import="com.herimihary.reservation.util.StringUtil"%>
+<%@page import="com.herimihary.reservation.entity.Classe"%>
+<%@page import="com.herimihary.reservation.service.ClasseService"%>
 <%@page import="com.herimihary.reservation.entity.Promotion"%>
 <%@page import="com.herimihary.reservation.service.PromotionService"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -11,14 +14,18 @@
 
 <%
     PromotionService service = null;
-     List<Promotion> listPromotion =null;
+    ClasseService classeService = null;
+    List<Promotion> listPromotion = null;
+    List<Classe> classes = null;
     try {
-         service = new PromotionService();
-         listPromotion = service.getAll();
+        service = new PromotionService();
+        classeService = new ClasseService();
+        listPromotion = service.getAll();
+        classes = classeService.getAll();
     } catch (Exception e) {
         e.printStackTrace();
     }
-    
+
 
     
 %>
@@ -67,6 +74,16 @@
                                 <label for="remise">Remise</label>
                                 <input type="number" class="form-control" id="remise" name="remise">
                             </div>
+                            <div class="col-sm-6">
+                                <label for="idclasse">Classe</label>
+                                <select class="form-select" name="idclasse">
+                                    <%if (classes != null) {%>
+                                    <% for (int i = 0; i < classes.size(); i++) {%>
+                                    <option value="<%=classes.get(i).getId()%>"><%=classes.get(i).getNom()%></option>
+                                    <%}
+                                         }%>
+                                </select>
+                            </div>
                         </div>
                         <div class="form-group row row mb-2">
                             <div class="col-sm-6">
@@ -91,10 +108,11 @@
                                 <th scope="col">Date fin</th>
                                 <th scope="col">Remise (%)</th>
                                 <th scope="col">Code promo</th>
+                                <th scope="col">Classe</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <%if(listPromotion!=null){%>
+                            <%if (listPromotion != null) {%>
                             <%for (int i = 0; i < listPromotion.size(); i++) {%>
                             <tr>
                                 <td scope="col"><%=listPromotion.get(i).getId()%></td>
@@ -102,8 +120,10 @@
                                 <td scope="col"><%=listPromotion.get(i).getDateFin()%></td>
                                 <td scope="col"><%=listPromotion.get(i).getRemise()%></td>
                                 <td scope="col"><%=listPromotion.get(i).getCode()%></td>
+                                <td scope="col"><%=StringUtil.getClasseLibelle(listPromotion.get(i).getIdclasse(),classes) %></td>
                             </tr>
-                            <%}}%>
+                            <%}
+                                }%>
 
 
 
