@@ -46,7 +46,7 @@
 
                 <div class="col-md-10 mx-auto">
 
-                    <form class="">
+                    <form class="" action="/ReservationServlet" method="post">
                         <h1 class="mx-auto">Reservation</h1>
                         <div class="form-group row mb-2">
                             <div class="col-sm-6">

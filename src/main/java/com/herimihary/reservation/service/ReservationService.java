@@ -6,6 +6,7 @@ package com.herimihary.reservation.service;
 
 import com.herimihary.reservation.ConnectionManager;
 import com.herimihary.reservation.entity.Reservation;
+import com.herimihary.reservation.util.DateUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -55,7 +56,7 @@ public class ReservationService implements IReservationService {
 
     @Override
     public Reservation getByReference(String reference) {
-           String sql = "select * from reservation where reference=? ";
+        String sql = "select * from reservation where reference=? ";
         Reservation resp;
         try {
             this.connection = ConnectionManager.getConnection();
@@ -82,7 +83,7 @@ public class ReservationService implements IReservationService {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return null;   
+        return null;
     }
 
     @Override
@@ -92,7 +93,34 @@ public class ReservationService implements IReservationService {
 
     @Override
     public Reservation save(Reservation reservation) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        DateUtil dateUtil = new DateUtil();
+        String sql = "insert into reservation(reference,numvol,depart,arriver,paysdepart,paysarriver,nbadulte,nbenfant,typevol) values (?,?,?,?,?,?,?,?,?)";
+
+        try {
+            this.connection = ConnectionManager.getConnection();
+//            this.connection.setAutoCommit(false);
+            PreparedStatement ps = this.connection.prepareStatement(sql);
+            ps.setString(1, reservation.getReference());
+            ps.setString(2, reservation.getNumVol());
+            ps.setDate(3, dateUtil.parseUtilToSqlDate(reservation.getDepart()));
+            ps.setDate(4, dateUtil.parseUtilToSqlDate(reservation.getArriver()));
+            ps.setInt(5, reservation.getPaysDepart());
+            ps.setInt(6, reservation.getPaysArriver());
+            ps.setInt(7, reservation.getNbAdulte());
+            ps.setInt(8, reservation.getNbEnfant());
+            ps.setInt(9, reservation.getTypevol());
+
+            if (ps.executeUpdate() > 0) {
+                ResultSet rs = ps.getGeneratedKeys();
+                while (rs.next()) {
+                    reservation.setId(rs.getInt(1));
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return reservation;
     }
 
     @Override

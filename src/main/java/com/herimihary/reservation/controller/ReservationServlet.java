@@ -7,6 +7,7 @@ package com.herimihary.reservation.controller;
 import com.herimihary.reservation.entity.Reservation;
 import com.herimihary.reservation.service.ReservationService;
 import com.herimihary.reservation.util.DateUtil;
+import com.herimihary.reservation.util.StringUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -35,6 +36,7 @@ public class ReservationServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         DateUtil dateUtil = new DateUtil();
+        StringUtil stringUtil = new StringUtil();
         ReservationService reservationService = new ReservationService();
         Reservation reservation = new Reservation();
         reservation.setTypevol(Integer.parseInt(request.getParameter("typevol")));
@@ -46,8 +48,9 @@ public class ReservationServlet extends HttpServlet {
         reservation.setNbEnfant(Integer.parseInt(request.getParameter("nbEnfant")));
         String promoCode = request.getParameter("promocode");
         
+        reservation.setReference(stringUtil.generateReference());
         
-        reservationService.save(reservation);
+        Reservation save = reservationService.save(reservation);
         
         
     }
