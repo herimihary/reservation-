@@ -17,6 +17,7 @@ public class Promotion {
     private Date dateFin;
     private int remise;
     private String code;
+    private int idclasse;
 
     public int getId() {
         return id;
@@ -58,4 +59,13 @@ public class Promotion {
         this.code = Code;
     }
 
+    public int getIdclasse() {
+        return idclasse;
+    }
+
+    public void setIdclasse(int idclasse) {
+        this.idclasse = idclasse;
+    }
+
+    
 }

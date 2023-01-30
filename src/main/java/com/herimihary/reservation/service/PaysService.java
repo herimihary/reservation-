@@ -34,8 +34,8 @@ public class PaysService implements IPaysService {
                 while(rs.next()){
                     resp = new Pays();                  
                     resp.setId(rs.getInt("id"));
-                    resp.setNomPays(rs.getString("nomPays"));
-                    resp.setCodePays(rs.getString("codePays"));
+                    resp.setNomPays(rs.getString("nompays"));
+                    resp.setCodePays(rs.getString("codepays"));
                     return resp;
                 }
             }
@@ -56,8 +56,8 @@ public class PaysService implements IPaysService {
                 while(rs.next()){
                     Pays temp = new Pays();                  
                     temp.setId(rs.getInt("id"));
-                    temp.setNomPays(rs.getString("nomPays"));
-                    temp.setCodePays(rs.getString("codePays"));
+                    temp.setNomPays(rs.getString("nompays"));
+                    temp.setCodePays(rs.getString("codepays"));
                     resp.add(temp);   
                 }
             }

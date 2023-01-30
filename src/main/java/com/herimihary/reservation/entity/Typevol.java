@@ -12,7 +12,7 @@ package com.herimihary.reservation.entity;
 public class Typevol {
 
     private int id;
-    private String Libelle;
+    private String libelle;
 
     public int getId() {
         return id;
@@ -23,11 +23,11 @@ public class Typevol {
     }
 
     public String getLibelle() {
-        return Libelle;
+        return libelle;
     }
 
     public void setLibelle(String Libelle) {
-        this.Libelle = Libelle;
+        this.libelle = Libelle;
     }
 
 }

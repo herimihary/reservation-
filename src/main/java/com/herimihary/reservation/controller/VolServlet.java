@@ -4,9 +4,11 @@
  */
 package com.herimihary.reservation.controller;
 
-import com.herimihary.reservation.entity.Promotion;
-import com.herimihary.reservation.service.PromotionService;
+import com.google.gson.Gson;
+import com.herimihary.reservation.entity.Tarifs;
+import com.herimihary.reservation.service.TarifsService;
 import com.herimihary.reservation.util.DateUtil;
+import com.herimihary.reservation.view.TarifClasse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,15 +16,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
  * @author rasen
  */
-@WebServlet(name = "PromotionServlet", urlPatterns = {"/PromotionServlet"})
-public class PromotionServlet extends HttpServlet {
+@WebServlet(name = "VolServlet", urlPatterns = {"/VolServlet"})
+public class VolServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,23 +37,15 @@ public class PromotionServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try {
-            PromotionService promotionService = new PromotionService();
-            DateUtil dateUtil = new DateUtil();
-            Promotion promotion = new Promotion();            
-            promotion.setCode(request.getParameter("code"));
-            promotion.setRemise(Integer.parseInt(request.getParameter("remise")));
-            promotion.setDateDebut(dateUtil.parseDate(request.getParameter("dateDebut")));
-            promotion.setDateFin(dateUtil.parseDate(request.getParameter("dateFin")));
-            promotion.setIdclasse(Integer.parseInt(request.getParameter("idclasse")));
-            promotionService.save(promotion);
-            response.sendRedirect(request.getContextPath() + "/promotion/promotionList.jsp");
-        } catch (Exception e) {
-            e.printStackTrace();
-            response.sendRedirect(request.getContextPath() + "/promotion/promotionList.jsp");
-        }
+        response.setContentType("text/json");
+        TarifsService service = new TarifsService();
+        DateUtil dateUtil = new DateUtil();
+        Date date = dateUtil.parseDate(request.getParameter("date")) ;
+        int typevol = Integer.parseInt(request.getParameter("typevol")) ;
+        List<TarifClasse> tarifsList = service.getTarifClasseByDate(date,typevol);
 
+        new Gson().toJson(tarifsList, response.getWriter());
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
