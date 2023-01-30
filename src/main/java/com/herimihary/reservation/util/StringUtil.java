@@ -22,6 +22,16 @@ public class StringUtil {
         }
         return pays.getCodePays().toUpperCase() + "-" + pays.getNomPays().toUpperCase();
     }
+    
+    public static String getPaysById(int idpays,List<Pays> pays){
+        Pays pay = new Pays();
+        for(int i=0;i<pays.size();i++){
+            if(idpays==pays.get(i).getId()){
+                pay =pays.get(i);
+            }
+        }
+        return formatPays(pay);
+    }
 
     public  String generateReference() {
         int leftLimit = 97; // letter 'a'
@@ -63,4 +73,6 @@ public class StringUtil {
         }
         return "Retour";
     }
+    
+    
 }

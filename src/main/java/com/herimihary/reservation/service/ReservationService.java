@@ -45,6 +45,8 @@ public class ReservationService implements IReservationService {
                     resp.setNbAdulte(rs.getInt("nbadulte"));
                     resp.setNbEnfant(rs.getInt("nbenfant"));
                     resp.setPrixTotal(rs.getDouble("prixtotal"));
+                    resp.setTarifDepart(rs.getInt("tarifdepart"));
+                    resp.setTarifDepart(rs.getInt("tarifretour"));
                     return resp;
                 }
             }
@@ -76,6 +78,8 @@ public class ReservationService implements IReservationService {
                     resp.setReference(rs.getString("reference"));
                     resp.setNbAdulte(rs.getInt("nbadulte"));
                     resp.setNbEnfant(rs.getInt("nbenfant"));
+                    resp.setTarifDepart(rs.getInt("tarifdepart"));
+                    resp.setTarifDepart(rs.getInt("tarifretour"));
                     return resp;
                 }
             }
@@ -93,7 +97,7 @@ public class ReservationService implements IReservationService {
     @Override
     public Reservation save(Reservation reservation) {
         DateUtil dateUtil = new DateUtil();
-        String sql = "insert into reservation(reference,numvol,depart,arriver,paysdepart,paysarriver,nbadulte,nbenfant,typevol) values (?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into reservation(reference,numvol,depart,arriver,paysdepart,paysarriver,nbadulte,nbenfant,typevol,tarifdepart,tarifretour) values (?,?,?,?,?,?,?,?,?,?,?)";
 
         try {
             this.connection = ConnectionManager.getConnection();
@@ -108,6 +112,9 @@ public class ReservationService implements IReservationService {
             ps.setInt(7, reservation.getNbAdulte());
             ps.setInt(8, reservation.getNbEnfant());
             ps.setInt(9, reservation.getTypevol());
+            ps.setInt(10, reservation.getTarifDepart());
+            ps.setInt(11, reservation.getTarifRetour());
+        
             
 
             if (ps.executeUpdate() > 0) {
@@ -125,7 +132,37 @@ public class ReservationService implements IReservationService {
 
     @Override
     public Reservation update(Reservation reservation) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        DateUtil dateUtil = new DateUtil();
+        String sql = "update reservation set reference=?,numvol=?,depart=?,arriver=?,paysdepart=?,paysarriver=?,nbadulte=?,nbenfant=?,typevol=?,tarifdepart=?,tarifretour=? where id=?";
+
+        try {
+            this.connection = ConnectionManager.getConnection();
+//            this.connection.setAutoCommit(false);
+            PreparedStatement ps = this.connection.prepareStatement(sql);
+            ps.setString(1, reservation.getReference());
+            ps.setString(2, reservation.getNumVol());
+            ps.setDate(3, dateUtil.parseUtilToSqlDate(reservation.getDepart()));
+            ps.setDate(4, dateUtil.parseUtilToSqlDate(reservation.getArriver()));
+            ps.setInt(5, reservation.getPaysDepart());
+            ps.setInt(6, reservation.getPaysArriver());
+            ps.setInt(7, reservation.getNbAdulte());
+            ps.setInt(8, reservation.getNbEnfant());
+            ps.setInt(9, reservation.getTypevol());
+            ps.setInt(10, reservation.getTarifDepart());
+            ps.setInt(11, reservation.getTarifRetour());
+            ps.setInt(12, reservation.getId());
+        
+            if (ps.executeUpdate() > 0) {
+                ResultSet rs = ps.getGeneratedKeys();
+                while (rs.next()) {
+                    reservation.setId(rs.getInt(1));
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return reservation;
     }
 
     @Override

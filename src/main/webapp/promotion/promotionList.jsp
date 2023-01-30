@@ -35,6 +35,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Promotion</title>
         <link rel="stylesheet" href="../css/bootstrap.css"></link> 
+        <script src="../js/jquery/jquery.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -81,7 +84,7 @@
                                     <% for (int i = 0; i < classes.size(); i++) {%>
                                     <option value="<%=classes.get(i).getId()%>"><%=classes.get(i).getNom()%></option>
                                     <%}
-                                         }%>
+                                        }%>
                                 </select>
                             </div>
                         </div>
@@ -89,8 +92,7 @@
                             <div class="col-sm-6">
                                 <label for="code">Code Promo</label>
                                 <input type="text" class="form-control" id="code" name="code">
-                            </div>
-
+                            </div>                          
                         </div>
                         <input type="submit" class="btn btn-primary mt-2 px-4 float-right" value="Enregistrer"/>
                     </form>
@@ -120,7 +122,7 @@
                                 <td scope="col"><%=listPromotion.get(i).getDateFin()%></td>
                                 <td scope="col"><%=listPromotion.get(i).getRemise()%></td>
                                 <td scope="col"><%=listPromotion.get(i).getCode()%></td>
-                                <td scope="col"><%=StringUtil.getClasseLibelle(listPromotion.get(i).getIdclasse(),classes) %></td>
+                                <td scope="col"><%=StringUtil.getClasseLibelle(listPromotion.get(i).getIdclasse(), classes)%></td>
                             </tr>
                             <%}
                                 }%>
@@ -132,5 +134,14 @@
                 </div>
             </div>
         </div>
+        
+
     </body>
+
 </html>
+
+<script>
+    $(document).ready(function() {
+        $("#exampleModal").modal();
+    });
+</sricpt>

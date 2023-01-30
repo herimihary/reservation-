@@ -5,6 +5,7 @@
 package com.herimihary.reservation.service;
 
 import com.herimihary.reservation.entity.Voyageur;
+import java.util.List;
 
 /**
  *
@@ -23,5 +24,11 @@ public interface IVoyageurService {
     Voyageur update(Voyageur voyageur);
 
     void delete(Voyageur voyageur);
+    
+    void saveBatch(List<Voyageur> voyageurs);
+    
+    List<Voyageur> getAll();
+    
+    List<Voyageur> getByReservation(int idreservation);
 
 }

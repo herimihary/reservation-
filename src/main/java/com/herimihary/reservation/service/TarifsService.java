@@ -135,6 +135,7 @@ public class TarifsService implements ITarifsService{
                     temp.setPrix(rs.getDouble("prix"));
                     temp.setTypeVol(rs.getInt("typevol"));
                     temp.setRemise(rs.getInt("remise"));
+                    temp.setIsdiscount(rs.getBoolean("isdiscount"));
                    
                     resp.add(temp);   
                 }

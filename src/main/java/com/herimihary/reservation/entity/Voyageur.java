@@ -1,21 +1,23 @@
 package com.herimihary.reservation.entity;
+
 import java.util.Date;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 /**
  *
  * @author rheri
  */
 public class Voyageur {
-   private int id;
-   private String  nom;
-    private String  preNom;
-     private Date datedeNaissance;
+
+    private int id;
+    private String nom;
+    private String preNom;
+    private Date datedeNaissance;
     private String passeport;
+    private int idreservation;
 
     public int getId() {
         return id;
@@ -56,8 +58,15 @@ public class Voyageur {
     public void setPasseport(String passeport) {
         this.passeport = passeport;
     }
+
+    public int getIdreservation() {
+        return idreservation;
+    }
+
+    public void setIdreservation(int idreservation) {
+        this.idreservation = idreservation;
+    }
     
     
-    
-    
+
 }

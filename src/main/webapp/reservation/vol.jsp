@@ -9,6 +9,7 @@
 <%
     ClasseService classeService = null;
     List<Classe> classes = null;
+    String reference = request.getParameter("reference");
     try {
         classeService = new ClasseService();
         classes = classeService.getAll();
@@ -43,52 +44,57 @@
             </div>
         </nav>
         <div class="container">
-            <div class="row">
-                <div class="col-6">
-                    <h4>Depart</h4>
-                    <div class="form-group row row mb-2">
+            <form method="post" action="/ReservationServlet">
+                <div class="row">
+                    <div class="col-6">
+                        <h4>Depart</h4>
+                        <div class="form-group row row mb-2">
+                            <input type="hidden" class="form-control" id="reference" name="reference" value="<%=reference%>">
+                            <input type="date" class="form-control" id="dateDebut" name="dateDebut" >
+                            <table class="table">
+                                <thead>
+                                    <tr id="listTarifTh">
+                                        <%for (int i = 0; i < classes.size(); i++) {%>
+                                        <th><%=classes.get(i).getNom()%></th>                                  
+                                            <%}%>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr id="listTarifTdDepart">
 
-                        <input type="date" class="form-control" id="dateDebut" name="dateDebut" >
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <h4>Arriver</h4>
+                        <input type="date" class="form-control" id="dateRetour" name="dateRetour" >
                         <table class="table">
                             <thead>
-                                <tr id="listTarifTh">
+                                <tr>
                                     <%for (int i = 0; i < classes.size(); i++) {%>
                                     <th><%=classes.get(i).getNom()%></th>                                  
                                         <%}%>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr id="listTarifTdDepart">
+                                <tr id="listTarifTdRetour">
+
 
                                 </tr>
 
+
                             </tbody>
                         </table>
-
                     </div>
                 </div>
-                <div class="col-6">
-                    <h4>Arriver</h4>
-                    <input type="date" class="form-control" id="dateRetour" name="dateRetour" >
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <%for (int i = 0; i < classes.size(); i++) {%>
-                                <th><%=classes.get(i).getNom()%></th>                                  
-                                    <%}%>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr id="listTarifTdRetour">
-
-
-                            </tr>
-
-
-                        </tbody>
-                    </table>
+                <div class="row">
+                    <input type="Submit" class="btn btn-success btn-lg" value="Suivant" name="Suivant"/>
                 </div>
-            </div>
+            </form>
         </div>
     </body>
 </html>
@@ -119,27 +125,27 @@
             },
             success: function (resp) {
                 console.log(resp);
-                if(typevol===1){
-                     $("#listTarifTdDepart").html("");
-                }else{
+                if (typevol === 1) {
+                    $("#listTarifTdDepart").html("");
+                } else {
                     $("#listTarifTdRetour").html("");
                 }
 
                 for (var i = 0; i < resp.length; i++) {
-                    var disable ="";
+                    var disable = "";
                     var styleremise = "";
-                    if(resp[i].prix===null || resp[i].prix===0){
-                       disable = "disabled";
+                    if (resp[i].prix === null || resp[i].prix === 0) {
+                        disable = "disabled";
                     }
-                    if(resp[i].remise!==0){
+                    if (resp[i].isdiscount === true) {
                         styleremise = ";background-color: #b5668c;";
                     }
                     if (typevol === 1) {
-                        
-                        $("#listTarifTdDepart").append('<td style="padding:20px'+styleremise+'"><input style="margin-right: 19px" class="form-check-input mr" type="radio" name="tarifDepart" '+disable+'/>' + resp[i].prix + '</td>');
+
+                        $("#listTarifTdDepart").append('<td style="padding:20px' + styleremise + '"><input value="' +  resp[i].idTarif + '" style="margin-right: 19px" class="form-check-input" type="radio" name="tarifDepart" ' + disable + '/>' + resp[i].prix + '</td>');
                     } else {
-                        
-                        $("#listTarifTdRetour").append('<td style="padding:20px'+styleremise+'"><input style="margin-right: 19px" class="form-check-input mr" type="radio" name="tarifRetour" '+disable+'/>' + resp[i].prix + '</td>');
+
+                        $("#listTarifTdRetour").append('<td style="padding:20px' + styleremise + '"><input value="' + resp[i].idTarif + '" style="margin-right: 19px" class="form-check-input" type="radio" name="tarifRetour" ' + disable + '/>' + resp[i].prix + '</td>');
                     }
 
 

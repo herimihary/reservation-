@@ -38,21 +38,37 @@ public class ReservationServlet extends HttpServlet {
         DateUtil dateUtil = new DateUtil();
         StringUtil stringUtil = new StringUtil();
         ReservationService reservationService = new ReservationService();
-        Reservation reservation = new Reservation();
-        reservation.setTypevol(Integer.parseInt(request.getParameter("typevol")));
-        reservation.setPaysDepart(Integer.parseInt(request.getParameter("paysDepart")));
-        reservation.setPaysArriver(Integer.parseInt(request.getParameter("paysArrivee")));
-        reservation.setDepart(dateUtil.parseDate(request.getParameter("dateDepart")));
-        reservation.setArriver(dateUtil.parseDate(request.getParameter("dateArrivee")));
-        reservation.setNbAdulte(Integer.parseInt(request.getParameter("nbAdulte")));
-        reservation.setNbEnfant(Integer.parseInt(request.getParameter("nbEnfant")));
-        String promoCode = request.getParameter("promocode");
+        if(request.getParameter("Suivant")!=null){
+            String reference  =  request.getParameter("reference");
+            int idtarifDepart = Integer.parseInt( request.getParameter("tarifDepart"));
+            int idtarifRetour = Integer.parseInt( request.getParameter("tarifRetour"));
+            Reservation reservation = reservationService.getByReference(reference);
+            reservation.setArriver(dateUtil.parseDate(request.getParameter("dateRetour")));
+            reservation.setDepart(dateUtil.parseDate(request.getParameter("dateDebut")));
+            reservation.setTarifDepart(idtarifDepart);
+            reservation.setTarifRetour(idtarifRetour);
+            reservationService.update(reservation);
+            response.sendRedirect(request.getContextPath() + "/reservation/voyageur.jsp?reference="+reservation.getReference());
+        }else{
+            
+            Reservation reservation = new Reservation();
+            reservation.setTypevol(Integer.parseInt(request.getParameter("typevol")));
+            reservation.setPaysDepart(Integer.parseInt(request.getParameter("paysDepart")));
+            reservation.setPaysArriver(Integer.parseInt(request.getParameter("paysArrivee")));
+            reservation.setDepart(dateUtil.parseDate(request.getParameter("dateDepart")));
+            reservation.setArriver(dateUtil.parseDate(request.getParameter("dateArrivee")));
+            reservation.setNbAdulte(Integer.parseInt(request.getParameter("nbAdulte")));
+            reservation.setNbEnfant(Integer.parseInt(request.getParameter("nbEnfant")));
+            String promoCode = request.getParameter("promocode");
+
+            reservation.setReference(stringUtil.generateReference());
+
+            Reservation save = reservationService.save(reservation);
+
+            response.sendRedirect(request.getContextPath() + "/reservation/vol.jsp?reference="+reservation.getReference());
+        }
         
-        reservation.setReference(stringUtil.generateReference());
         
-        Reservation save = reservationService.save(reservation);
-        
-        response.sendRedirect(request.getContextPath() + "/reservation/vol.jsp?reference="+reservation.getReference());
         
         
     }

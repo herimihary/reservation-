@@ -40,7 +40,7 @@ public class PromotionService implements IPromotionService {
                     resp.setCode(rs.getString("code"));
                     resp.setRemise(rs.getInt("remise"));
                     resp.setDateFin(rs.getDate("datefin"));
-                    resp.setDateDebut(rs.getDate("datefin"));
+                    resp.setDateDebut(rs.getDate("datedebut"));
                     resp.setIdclasse(rs.getInt("idclasse"));
                     return resp;
                 }
@@ -65,7 +65,7 @@ public class PromotionService implements IPromotionService {
                     temp.setCode(rs.getString("code"));
                     temp.setRemise(rs.getInt("remise"));
                     temp.setDateFin(rs.getDate("datefin"));
-                    temp.setDateDebut(rs.getDate("datefin"));
+                    temp.setDateDebut(rs.getDate("datedebut"));
                     temp.setIdclasse(rs.getInt("idclasse"));
 
                     resp.add(temp);
