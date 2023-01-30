@@ -41,6 +41,7 @@ public class PromotionService implements IPromotionService {
                     resp.setRemise(rs.getInt("remise"));
                     resp.setDateFin(rs.getDate("datefin"));
                     resp.setDateDebut(rs.getDate("datefin"));
+                    resp.setIdclasse(rs.getInt("idclasse"));
                     return resp;
                 }
             }
@@ -65,6 +66,7 @@ public class PromotionService implements IPromotionService {
                     temp.setRemise(rs.getInt("remise"));
                     temp.setDateFin(rs.getDate("datefin"));
                     temp.setDateDebut(rs.getDate("datefin"));
+                    temp.setIdclasse(rs.getInt("idclasse"));
 
                     resp.add(temp);
                 }
@@ -83,8 +85,8 @@ public class PromotionService implements IPromotionService {
     @Override
     public Promotion save(Promotion promotion) {
         DateUtil dateUtil = new DateUtil();
-        String sql = "insert into promotion(dateDebut,dateFin,remise,code) values (?,?,?,?)";
-        try {
+        String sql="insert into promotion(dateDebut,dateFin,remise,code,idclasse) values (?,?,?,?,?)";
+        try{
             this.connection = ConnectionManager.getConnection();
 //            this.connection.setAutoCommit(false);
             PreparedStatement ps = this.connection.prepareStatement(sql);
@@ -92,25 +94,26 @@ public class PromotionService implements IPromotionService {
             ps.setDate(2, dateUtil.parseUtilToSqlDate(promotion.getDateFin()));
             ps.setInt(3, promotion.getRemise());
             ps.setString(4, promotion.getCode());
-
-            if (ps.executeUpdate() > 0) {
+            ps.setInt(5, promotion.getIdclasse());
+ 
+            if(ps.executeUpdate()>1){
 //                this.connection.commit(); 
                 ResultSet rs = ps.getGeneratedKeys();
-                while (rs.next()) {
+                while(rs.next()){
                     promotion.setId(rs.getInt(1));
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            if (this.connection != null) {
-                try {
+        }catch(Exception e){
+             e.printStackTrace();
+            if(this.connection!=null){
+                try{
                     this.connection.rollback();
-                } catch (Exception ex) {
+                }catch(Exception ex){
                     ex.printStackTrace();
                 }
             }
         }
-        return promotion;
+       return promotion;
     }
 
     @Override
