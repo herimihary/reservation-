@@ -83,8 +83,8 @@ public class PromotionService implements IPromotionService {
     @Override
     public Promotion save(Promotion promotion) {
         DateUtil dateUtil = new DateUtil();
-        String sql="insert into promotion(dateDebut,dateFin,remise,code) values (?,?,?,?)";
-        try{
+        String sql = "insert into promotion(dateDebut,dateFin,remise,code) values (?,?,?,?)";
+        try {
             this.connection = ConnectionManager.getConnection();
 //            this.connection.setAutoCommit(false);
             PreparedStatement ps = this.connection.prepareStatement(sql);
@@ -92,25 +92,25 @@ public class PromotionService implements IPromotionService {
             ps.setDate(2, dateUtil.parseUtilToSqlDate(promotion.getDateFin()));
             ps.setInt(3, promotion.getRemise());
             ps.setString(4, promotion.getCode());
- 
-            if(ps.executeUpdate()>1){
+
+            if (ps.executeUpdate() > 0) {
 //                this.connection.commit(); 
                 ResultSet rs = ps.getGeneratedKeys();
-                while(rs.next()){
+                while (rs.next()) {
                     promotion.setId(rs.getInt(1));
                 }
             }
-        }catch(Exception e){
-             e.printStackTrace();
-            if(this.connection!=null){
-                try{
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (this.connection != null) {
+                try {
                     this.connection.rollback();
-                }catch(Exception ex){
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }
         }
-       return promotion;
+        return promotion;
     }
 
     @Override
