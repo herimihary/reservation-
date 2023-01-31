@@ -22,6 +22,8 @@ public class Reservation {
     private int paysArriver;
     private int nbAdulte;
     private int nbEnfant;
+    private int tarifDepart;
+    private int tarifRetour;
 
     public int getPaysDepart() {
         return paysDepart;
@@ -110,6 +112,22 @@ public class Reservation {
 
     public void setTypevol(int typevol) {
         this.typevol = typevol;
+    }
+
+    public int getTarifDepart() {
+        return tarifDepart;
+    }
+
+    public void setTarifDepart(int tarifDepart) {
+        this.tarifDepart = tarifDepart;
+    }
+
+    public int getTarifRetour() {
+        return tarifRetour;
+    }
+
+    public void setTarifRetour(int tarifRetour) {
+        this.tarifRetour = tarifRetour;
     }
     
     

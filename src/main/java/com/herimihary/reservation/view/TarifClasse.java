@@ -18,6 +18,7 @@ public class TarifClasse {
     private Date date;
     private int typeVol;
     private int remise;
+    private boolean isdiscount;
 
     public int getIdClasse() {
         return idClasse;
@@ -73,6 +74,14 @@ public class TarifClasse {
 
     public void setRemise(int remise) {
         this.remise = remise;
+    }
+
+    public boolean getIsdiscount() {
+        return isdiscount;
+    }
+
+    public void setIsdiscount(boolean isdiscount) {
+        this.isdiscount = isdiscount;
     }
     
     

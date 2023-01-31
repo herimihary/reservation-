@@ -4,11 +4,12 @@
  */
 package com.herimihary.reservation.controller;
 
-import com.google.gson.Gson;
-import com.herimihary.reservation.entity.Tarifs;
-import com.herimihary.reservation.service.TarifsService;
+import com.herimihary.reservation.entity.Reservation;
+import com.herimihary.reservation.entity.Voyageur;
+import com.herimihary.reservation.service.ReservationService;
+import com.herimihary.reservation.service.VoyageurService;
 import com.herimihary.reservation.util.DateUtil;
-import com.herimihary.reservation.view.TarifClasse;
+import com.herimihary.reservation.util.StringUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -16,15 +17,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author rasen
  */
-@WebServlet(name = "VolServlet", urlPatterns = {"/VolServlet"})
-public class VolServlet extends HttpServlet {
+@WebServlet(name = "VoyageurServlet", urlPatterns = {"/VoyageurServlet"})
+public class VoyageurServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,16 +38,27 @@ public class VolServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/json");
-        
-        TarifsService service = new TarifsService();
+        response.setContentType("text/html;charset=UTF-8");
         DateUtil dateUtil = new DateUtil();
-        Date date = dateUtil.parseDate(request.getParameter("date")) ;
-        int typevol = Integer.parseInt(request.getParameter("typevol")) ;
-        List<TarifClasse> tarifsList = service.getTarifClasseByDate(date,typevol);
-
-        new Gson().toJson(tarifsList, response.getWriter());
+        StringUtil stringUtil = new StringUtil();
+        VoyageurService voyageurService = new VoyageurService();
+        String reference = request.getParameter("reference");
+        ReservationService reservationService = new ReservationService();
+        Reservation reservation = reservationService.getByReference(reference);
+        List<Voyageur> voyageurList = new ArrayList<Voyageur>();
+        for(int i=0;i<reservation.getNbAdulte()+reservation.getNbEnfant();i++){
+            Voyageur temp = new Voyageur();
+            temp.setIdreservation(reservation.getId());
+            temp.setNom(request.getParameter("nom_"+i));
+            temp.setPreNom(request.getParameter("prenom_"+i));
+            temp.setDatedeNaissance(dateUtil.parseDate(request.getParameter("datenaissance_"+i)));
+            temp.setPasseport(request.getParameter("passeport_"+i));
+            voyageurList.add(temp);            
+        }
+        voyageurService.saveBatch(voyageurList);
         
+        response.sendRedirect(request.getContextPath() + "/reservation/facture.jsp?reference="+reservation.getReference());
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

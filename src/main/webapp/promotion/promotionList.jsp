@@ -35,11 +35,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Promotion</title>
         <link rel="stylesheet" href="../css/bootstrap.css"></link> 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="../js/jquery/jquery.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -94,8 +92,7 @@
                             <div class="col-sm-6">
                                 <label for="code">Code Promo</label>
                                 <input type="text" class="form-control" id="code" name="code">
-                            </div>
-
+                            </div>                          
                         </div>
                         <input type="submit" class="btn btn-primary mt-2 px-4 float-right" value="Enregistrer"/>
                     </form>
@@ -117,7 +114,6 @@
                             </tr>
                         </thead>
                         <tbody>
-
                             <%if (listPromotion != null) {%>
                             <%for (int i = 0; i < listPromotion.size(); i++) {%>
                             <tr>
@@ -130,15 +126,14 @@
                                 <td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"><i class="fa fa-pencil"></i>edit </button></td>
 
                             </tr>
+
                             <%}
                                 }%>
 
 
 
                         </tbody>
-
                     </table>
-
                 </div>
             </div>
         </div>
@@ -155,7 +150,7 @@
                         <div class="col-md-10 mx-auto">
 
                             <form class="" action="/PromotionServlet" method="post">
-                                
+
                                 <div class="form-group row row mb-2">
                                     <div class="col-sm-6">
                                         <label for="dateDebut">Date debut</label>
@@ -179,7 +174,7 @@
                                             <% for (int i = 0; i < classes.size(); i++) {%>
                                             <option value="<%=classes.get(i).getId()%>"><%=classes.get(i).getNom()%></option>
                                             <%}
-                                        }%>
+                                                }%>
                                         </select>
                                     </div>
                                 </div>
@@ -190,7 +185,7 @@
                                     </div>
 
                                 </div>
-                                
+
                             </form>
                         </div>
 
@@ -202,10 +197,14 @@
                 </div>
             </div>
         </div>
+
+
     </body>
+
 </html>
+
 <script>
-    $('#myModal').on('shown.bs.modal', function () {
-        $('#myInput').trigger('focus');
+    $(document).ready(function () {
+        $("#exampleModal").modal();
     });
-</script>
+    </sricpt>
