@@ -5,12 +5,15 @@
 package com.herimihary.reservation.service;
 
 import com.herimihary.reservation.ConnectionManager;
+import com.herimihary.reservation.entity.Place;
 import com.herimihary.reservation.entity.Reservation;
 import com.herimihary.reservation.util.DateUtil;
+import com.herimihary.reservation.view.ReservationDetails;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -114,8 +117,6 @@ public class ReservationService implements IReservationService {
             ps.setInt(9, reservation.getTypevol());
             ps.setInt(10, reservation.getTarifDepart());
             ps.setInt(11, reservation.getTarifRetour());
-        
-            
 
             if (ps.executeUpdate() > 0) {
                 ResultSet rs = ps.getGeneratedKeys();
@@ -151,7 +152,7 @@ public class ReservationService implements IReservationService {
             ps.setInt(10, reservation.getTarifDepart());
             ps.setInt(11, reservation.getTarifRetour());
             ps.setInt(12, reservation.getId());
-        
+
             if (ps.executeUpdate() > 0) {
                 ResultSet rs = ps.getGeneratedKeys();
                 while (rs.next()) {
@@ -168,6 +169,42 @@ public class ReservationService implements IReservationService {
     @Override
     public void delete(Reservation reservation) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public ReservationDetails getDetailsByReference(String reference) {
+        String sql = "select * from reservationdetails where reference=?";
+        ReservationDetails resp = null;
+        try {
+            this.connection = ConnectionManager.getConnection();
+            PreparedStatement ps = this.connection.prepareCall(sql);
+            ps.setString(1, reference);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    resp = new ReservationDetails();
+                    resp.setReference(rs.getString("reference"));
+                    resp.setNumvol(rs.getString("numvol"));
+                    resp.setDepart(rs.getDate("depart"));
+                    resp.setArriver(rs.getDate("arriver"));
+                    resp.setNbadulte(rs.getInt("nbadulte"));
+                    resp.setNbenfant(rs.getInt("nbenfant"));
+                    
+                    resp.setPrixdepart(rs.getDouble("prixdepart"));
+                    resp.setPrixdepartremise(rs.getDouble("prixdepartremise"));
+                    resp.setRemisedepart(rs.getInt("remisedepart"));
+                    resp.setClassedepart(rs.getString("classedepart"));
+
+                    resp.setPrixretour(rs.getDouble("prixretour"));
+                    resp.setPrixretourremise(rs.getDouble("prixretourremise"));
+                    resp.setClasseretour(rs.getString("classeretour"));
+                    resp.setRemiseretour(rs.getInt("remiseretour"));
+
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return resp;
     }
 
 }
