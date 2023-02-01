@@ -58,28 +58,43 @@ public class CheckingServlet extends HttpServlet {
                 if (checkedPlaces == null) {
                     errors.add("Nombre total de voyageur doit etre egat au nombre de place choisit");
                 }
-                if (checkedPlaces != null &&voyageurs.size() != checkedPlaces.length) {
+                if (checkedPlaces != null && voyageurs.size() != checkedPlaces.length) {
                     errors.add("Nombre total de voyageur doit etre egat au nombre de place choisit");
                 }
+                if (voyageurs.get(0).getIdplace() > 0) {
+                    errors.add("le voyageur a deja une place");
+                    request.setAttribute("errors", errors);
+
+                    dispatcher.forward(request, response);
+                }
+
                 if (automaticCheckbox != null) {
                     placeservice.automaticChecking(voyageurs);
-                    response.sendRedirect(request.getContextPath() + "/reservation/facture.jsp?reference=" + reference);
+                    response.sendRedirect(request.getContextPath() + "/checking/place.jsp?reference=" + reference);
                     return;
                 } else {
-                    for (int i = 0; i < voyageurs.size(); i++) {
+                    try {
 
-                        int idplace = Integer.parseInt(checkedPlaces[i]);
-                        Place place = placeservice.getById(idplace);
-                        if (voyageurs.get(i).geAge() < 16 && place.isIsDanger()) {
-                            errors.add("Les enfants moins de 16 ans ne doivent pas s'assoir dans les places danger");
+                        for (int i = 0; i < voyageurs.size(); i++) {
+
+                            int idplace = Integer.parseInt(checkedPlaces[i]);
+                            Place place = placeservice.getById(idplace);
+                            if (voyageurs.get(i).geAge() < 16 && place.isIsDanger()) {
+                                errors.add("Les enfants moins de 16 ans ne doivent pas s'assoir dans les places danger");
+                            }
+                            voyageurs.get(i).setIdplace(idplace);
+                            PlaceDisponible temp = new PlaceDisponible();
+                            temp.setIdplace(idplace);
+                            temp.setIdvol(1);
+                            temp.setIsdisponible(false);
+                            placedispo.add(temp);
                         }
-                        voyageurs.get(i).setIdplace(idplace);
-                        PlaceDisponible temp = new PlaceDisponible();
-                        temp.setIdplace(idplace);
-                        temp.setIdvol(1);
-                        temp.setIsdisponible(false);
-                        placedispo.add(temp);
+                    } catch (Exception e) {
+                        errors.add(e.getMessage());
+                        e.printStackTrace();
+
                     }
+
                 }
 
                 if (errors.size() > 0) {
@@ -90,7 +105,7 @@ public class CheckingServlet extends HttpServlet {
                     voyageurService.updateBatch(voyageurs);
                     placeservice.udpatePlaceDisponible(placedispo);
 
-                    response.sendRedirect(request.getContextPath() + "/reservation/facture.jsp?reference=" + reference);
+                    response.sendRedirect(request.getContextPath() + "/checking/place.jsp?reference=" + reference);
                 }
 
             } catch (Exception e) {
