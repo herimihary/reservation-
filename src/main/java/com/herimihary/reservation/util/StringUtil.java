@@ -6,7 +6,9 @@ package com.herimihary.reservation.util;
 
 import com.herimihary.reservation.entity.Classe;
 import com.herimihary.reservation.entity.Pays;
+import com.herimihary.reservation.entity.Place;
 import com.herimihary.reservation.entity.Tarifs;
+import com.herimihary.reservation.service.PlaceService;
 import java.util.List;
 import java.util.Random;
 
@@ -72,6 +74,16 @@ public class StringUtil {
             return "Aller";
         }
         return "Retour";
+    }
+    
+    public static String getPlaceLibelle(int idplace){
+        PlaceService service = new PlaceService();
+        Place p = service.getById(idplace);
+        if(p!=null){
+            return p.getNumeroPlace();
+        }
+        return null;
+         
     }
     
     

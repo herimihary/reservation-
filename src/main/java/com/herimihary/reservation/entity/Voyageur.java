@@ -1,5 +1,10 @@
 package com.herimihary.reservation.entity;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.Date;
 
 /*
@@ -18,6 +23,7 @@ public class Voyageur {
     private Date datedeNaissance;
     private String passeport;
     private int idreservation;
+    private int idplace;
 
     public int getId() {
         return id;
@@ -66,7 +72,25 @@ public class Voyageur {
     public void setIdreservation(int idreservation) {
         this.idreservation = idreservation;
     }
-    
-    
+
+    public int getIdplace() {
+        return idplace;
+    }
+
+    public void setIdplace(int idplace) {
+        this.idplace = idplace;
+    }
+
+    public int geAge() {
+        int period =0;
+        LocalDate curDate = LocalDate.now();
+
+        Instant instant = Instant.ofEpochMilli(this.getDatedeNaissance().getTime());
+        LocalDate dob =  LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate();
+
+
+        
+        return curDate.getYear() - dob.getYear();
+    }
 
 }

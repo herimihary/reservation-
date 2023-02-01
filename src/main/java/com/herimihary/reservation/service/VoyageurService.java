@@ -76,7 +76,7 @@ public class VoyageurService implements IVoyageurService {
 
     @Override
     public void saveBatch(List<Voyageur> voyageurs) {
-        String sql = "insert into voyageur(nom,prenom,datedenaissance,passeport,idreservation) values (?,?,?,?,?)";
+        String sql = "insert into voyageur(nom,prenom,datedenaissance,passeport,idreservation,idplace) values (?,?,?,?,?,?)";
         DateUtil dateUtil = new DateUtil();
         try{
             this.connection = ConnectionManager.getConnection();
@@ -87,6 +87,7 @@ public class VoyageurService implements IVoyageurService {
                 ps.setDate(3, dateUtil.parseUtilToSqlDate(voyageurs.get(i).getDatedeNaissance()));
                 ps.setString(4, voyageurs.get(i).getPasseport());
                 ps.setInt(5, voyageurs.get(i).getIdreservation());
+                ps.setInt(6, voyageurs.get(i).getIdplace());
                 ps.addBatch();
             }
             ps.executeBatch();
@@ -118,7 +119,7 @@ public class VoyageurService implements IVoyageurService {
                     temp.setDatedeNaissance(rs.getDate("datedenaissance"));
                     temp.setId(rs.getInt("id"));
                     temp.setIdreservation(rs.getInt("idreservation"));
-                    
+                    temp.setIdplace(rs.getInt("idplace"));
                    
                     resp.add(temp);   
                 }
@@ -127,6 +128,24 @@ public class VoyageurService implements IVoyageurService {
             ex.printStackTrace();
         }
         return resp;
+    }
+
+    @Override
+    public void updateBatch(List<Voyageur> voyageurs) {
+        String sql = "update voyageur set idplace=? where id=?";
+        try{
+            this.connection = ConnectionManager.getConnection();
+            PreparedStatement ps = this.connection.prepareStatement(sql);
+
+            for(int i=0;i<voyageurs.size();i++){         
+                ps.setInt(1, voyageurs.get(i).getIdplace());
+                ps.setInt(2, voyageurs.get(i).getId());
+                ps.addBatch();
+            }
+            ps.executeBatch();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
 }

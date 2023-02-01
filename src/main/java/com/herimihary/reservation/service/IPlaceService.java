@@ -5,6 +5,8 @@
 package com.herimihary.reservation.service;
 
 import com.herimihary.reservation.entity.Place;
+import com.herimihary.reservation.entity.PlaceDisponible;
+import com.herimihary.reservation.entity.Voyageur;
 import java.util.List;
 
 /**
@@ -16,13 +18,21 @@ public interface IPlaceService {
     Place getById(int id);
 
     List<Place> getAll();
+    
+    List<Place> getPlacesDisponible();
 
     List<Place> getBynumeroPlace(int numeroPlace);
+
+    Place save(Place place);
+
+    Place Update(Place place);
+
+    void delete(Place place);
     
- Place  save(Place place);
-  Place  Update(Place place);
-     void   delete(Place place);  
+    List<Place> reorderPlace(List<Place> places);
     
+    void udpatePlaceDisponible(List<PlaceDisponible> placesdisponibles);
     
+    void automaticChecking(List<Voyageur> voyageurs);
 
 }

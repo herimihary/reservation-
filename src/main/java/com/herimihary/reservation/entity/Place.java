@@ -8,10 +8,12 @@ package com.herimihary.reservation.entity;
  *
  * @author rheri
  */
-public class Place {
+public class Place  implements Comparable<Place>{
    private int  id;
-    private int numeroPlace;
-   private int  fk_idClasse;
+   private String numeroPlace;
+   private int  idClasse;
+   private boolean isDanger;
+   private boolean isDisponible;
 
     public int getId() {
         return id;
@@ -21,22 +23,50 @@ public class Place {
         this.id = id;
     }
 
-    public int getNumeroPlace() {
+    public String getNumeroPlace() {
         return numeroPlace;
     }
 
-    public void setNumeroPlace(int numeroPlace) {
+    public void setNumeroPlace(String numeroPlace) {
         this.numeroPlace = numeroPlace;
     }
 
-    public int getFk_idClasse() {
-        return fk_idClasse;
+    public int getIdClasse() {
+        return idClasse;
     }
 
-    public void setFk_idClasse(int fk_idClasse) {
-        this.fk_idClasse = fk_idClasse;
+    public void setIdClasse(int idClasse) {
+        this.idClasse = idClasse;
     }
 
+    
+
+    public boolean isIsDanger() {
+        return isDanger;
+    }
+
+    public void setIsDanger(boolean isDanger) {
+        this.isDanger = isDanger;
+    }
+
+    public boolean isIsDisponible() {
+        return isDisponible;
+    }
+
+    public void setIsDisponible(boolean isDisponible) {
+        this.isDisponible = isDisponible;
+    }
+
+    @Override
+    public int compareTo(Place o) {
+        String a = String.valueOf(this.getNumeroPlace().charAt(0));
+        String b = String.valueOf(o.getNumeroPlace().charAt(0));
+        return this.id - o.getId();
+    }
+    
+    
+
+    
     
     
 }

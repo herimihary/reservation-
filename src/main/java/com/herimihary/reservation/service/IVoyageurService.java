@@ -27,6 +27,8 @@ public interface IVoyageurService {
     
     void saveBatch(List<Voyageur> voyageurs);
     
+    void updateBatch(List<Voyageur> voyageurs);
+    
     List<Voyageur> getAll();
     
     List<Voyageur> getByReservation(int idreservation);

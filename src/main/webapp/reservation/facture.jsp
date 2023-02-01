@@ -150,6 +150,7 @@
                                 <th scope="col">Prenom</th>
                                 <th scope="col">Passeport</th>
                                 <th scope="col">Date Naissance</th>
+                                <th scope="col">Place</th>
                             </tr>
                         </thead>
                         <tbody>    
@@ -161,6 +162,7 @@
                                 <td><%=listVoyageur.get(i).getPreNom()%></td>
                                 <td><%=listVoyageur.get(i).getPasseport()%></td>
                                 <td><%=listVoyageur.get(i).getDatedeNaissance()%></td>
+                                <td><%=StringUtil.getPlaceLibelle(listVoyageur.get(i).getIdplace()) %></td>
                             </tr>
                             <%}
                                 }%>

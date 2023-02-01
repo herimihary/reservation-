@@ -30,32 +30,30 @@
                 </div>
             </div>
         </nav>
-        <form>
 
-            <div class="container">
-                <div class="row">
-                    <div class="col-6">
 
+        <div class="container">
+            <div class="row" style="flex-direction: column;align-items: center;display: flex;">
+                <div class="col-6" style="background-color:#d3dae9; padding: 20px;margin:  20px">
+                    <form action="/CheckingServlet" method="post">
                         <div class="row mb-3">
                             <label  class="col-sm-3 col-form-label">Reference</label>
                             <div class="col-sm-10">
-                                <input type="texte" class="form-control" id="inputEmail3">
-
+                                <input type="text" class="form-control" id="reference" name="reference">
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col-sm">             
-                                <input type="button" class="btn btn-primary" value="rechercher" >
+                                <input type="submit" class="btn btn-primary" value="Rechercher" >
                             </div>
                         </div>
+                    </form>
 
-
-                    </div>
                 </div>
             </div>
+        </div>
 
-        </form>
+
 
     </body>
 </html>
