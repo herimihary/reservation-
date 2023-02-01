@@ -66,6 +66,7 @@ public class CheckingServlet extends HttpServlet {
                     request.setAttribute("errors", errors);
 
                     dispatcher.forward(request, response);
+                    return;
                 }
 
                 if (automaticCheckbox != null) {
