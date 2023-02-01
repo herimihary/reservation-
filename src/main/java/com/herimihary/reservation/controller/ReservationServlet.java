@@ -59,6 +59,7 @@ public class ReservationServlet extends HttpServlet {
             reservation.setArriver(dateUtil.parseDate(request.getParameter("dateArrivee")));
             reservation.setNbAdulte(Integer.parseInt(request.getParameter("nbAdulte")));
             reservation.setNbEnfant(Integer.parseInt(request.getParameter("nbEnfant")));
+            reservation.setNumVol("MK289");
             String promoCode = request.getParameter("promocode");
 
             reservation.setReference(stringUtil.generateReference());
