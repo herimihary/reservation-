@@ -26,7 +26,7 @@
                     <a class="nav-item nav-link" href="/checking/checking.jsp">Checking</a>
                     <a class="nav-item nav-link" href="/promotion/promotionList.jsp">Promotion</a>
                     <a class="nav-item nav-link" href="#">Classe</a>
-                    <a class="nav-item nav-link" href="#">Tarifs</a>                  
+                    <a class="nav-item nav-link" href="/tarifs/tarifsList.jsp">Tarifs</a>                  
                 </div>
             </div>
         </nav>

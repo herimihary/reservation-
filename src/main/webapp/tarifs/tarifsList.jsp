@@ -44,7 +44,7 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <a class="nav-item nav-link active" href="/index.jsp">Reservation</a>
-                    <a class="nav-item nav-link active" href="#">Checking</a>
+                    <a class="nav-item nav-link active" href="/checking/checking.jsp">Checking</a>
                     <a class="nav-item nav-link" href="/promotion/promotionList.jsp">Promotion</a>
                     <a class="nav-item nav-link" href="#">Classe</a>
                     <a class="nav-item nav-link" href="/tarifs/tarifsList.jsp">Tarifs</a>                  
