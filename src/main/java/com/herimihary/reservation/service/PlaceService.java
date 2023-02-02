@@ -144,7 +144,7 @@ public class PlaceService implements IPlaceService {
 
     @Override
     public List<Place> getPlacesDisponible() {
-        String sql = "select p.*,pd.isdisponible from placedisponible pd join place p on pd.idplace = p.id";
+        String sql = "select p.*,pd.isdisponible,pd.isbroken from placedisponible pd join place p on pd.idplace = p.id";
         List<Place> resp = new ArrayList<Place>();
         try {
             this.connection = ConnectionManager.getConnection();
@@ -157,6 +157,7 @@ public class PlaceService implements IPlaceService {
                     temp.setIdClasse(rs.getInt("idclasse"));
                     temp.setIsDanger(rs.getBoolean("isdanger"));
                     temp.setIsDisponible(rs.getBoolean("isdisponible"));
+                    temp.setIsBroked(rs.getBoolean("isbroken"));
                     resp.add(temp);
                 }
             }
@@ -223,7 +224,7 @@ public class PlaceService implements IPlaceService {
         List<PlaceDisponible> placedispo = new ArrayList<>();
         for(int i=0;i<places.size();i++){
            
-            if(places.get(i).isIsDisponible()){
+            if(places.get(i).isIsDisponible() && !places.get(i).isIsBroked()){
                 voyageurs.get(count).setIdplace(places.get(i).getId());
                 PlaceDisponible temp = new PlaceDisponible();
                 temp.setIdplace(places.get(i).getId());
@@ -240,5 +241,31 @@ public class PlaceService implements IPlaceService {
         voyageurservice.updateBatch(voyageurs);
         this.udpatePlaceDisponible(placedispo);
 
+    }
+
+    @Override
+    public Place getByIdPlaceDisponible(int id) {
+        String sql = "select p.id,p.numeroplace,p.idclasse,pd.isdisponible,p.isdanger,pd.isbroken from place p join placedisponible pd on pd.idplace=p.id where p.id=? ";
+        Place resp;
+        try {
+            this.connection = ConnectionManager.getConnection();
+            PreparedStatement ps = this.connection.prepareCall(sql);
+            ps.setInt(1, id);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    resp = new Place();
+                    resp.setId(rs.getInt("id"));
+                    resp.setNumeroPlace(rs.getString("numeroplace"));
+                    resp.setIdClasse(rs.getInt("idclasse"));
+                    resp.setIsDanger(rs.getBoolean("isdanger"));
+                    resp.setIsBroked(rs.getBoolean("isbroken"));
+                    return resp;
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 }

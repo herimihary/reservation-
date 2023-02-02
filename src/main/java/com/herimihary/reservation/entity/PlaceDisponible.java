@@ -12,6 +12,7 @@ public class PlaceDisponible {
     private int idvol;
     private int idplace;
     private boolean isdisponible;
+    private boolean isbroked;
 
     public int getIdvol() {
         return idvol;
@@ -36,6 +37,16 @@ public class PlaceDisponible {
     public void setIsdisponible(boolean isdisponible) {
         this.isdisponible = isdisponible;
     }
+
+    public boolean isIsbroked() {
+        return isbroked;
+    }
+
+    public void setIsbroked(boolean isbroked) {
+        this.isbroked = isbroked;
+    }
+    
+    
     
     
 }

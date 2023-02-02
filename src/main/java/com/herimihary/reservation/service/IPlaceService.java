@@ -34,5 +34,7 @@ public interface IPlaceService {
     void udpatePlaceDisponible(List<PlaceDisponible> placesdisponibles);
     
     void automaticChecking(List<Voyageur> voyageurs);
+    
+     Place getByIdPlaceDisponible(int id);
 
 }

@@ -79,9 +79,12 @@ public class CheckingServlet extends HttpServlet {
                         for (int i = 0; i < voyageurs.size(); i++) {
 
                             int idplace = Integer.parseInt(checkedPlaces[i]);
-                            Place place = placeservice.getById(idplace);
+                            Place place = placeservice.getByIdPlaceDisponible(idplace);
                             if (voyageurs.get(i).geAge() < 16 && place.isIsDanger()) {
                                 errors.add("Les enfants moins de 16 ans ne doivent pas s'assoir dans les places danger");
+                            }
+                            if(place.isIsBroked()){
+                                errors.add("Place casser, ne peut etre choisit");
                             }
                             voyageurs.get(i).setIdplace(idplace);
                             PlaceDisponible temp = new PlaceDisponible();

@@ -103,7 +103,7 @@
 
                                     </tr>
                                     <%}
-                                }%>
+                                        }%>
                                 </tbody>
                             </table>
                         </div>
@@ -141,6 +141,7 @@
                                             String disabled = "";
                                             String dangerstyle = "";
                                             String disabledStyle = "";
+                                            String brokenStyle = "";
                                             if (!places.get(j).isIsDisponible()) {
                                                 disabled = "disabled";
                                                 disabledStyle = "background-color:blue;";
@@ -148,12 +149,16 @@
                                             if (places.get(j).isIsDanger()) {
                                                 dangerstyle = "background-color:#ed7474;";
                                             }
+                                            if (places.get(j).isIsBroked()) {
+                                                
+                                                brokenStyle = "background-color:red;";
+                                            }
                                     %>
                                     <%if (j == 2 || j == 5 || j == 9 || j == 12
                                                 || j == 16 || j == 19 || j == 23 || j == 26 || j == 30 || j == 33 || j == 37 || j == 40) {%>
-                                    <td scope="col"></td>
+                                                <td scope="col"></td>
                                     <%}%>
-                                    <td scope="col" style="<%=dangerstyle + disabledStyle%>">
+                                    <td scope="col" style="<%=dangerstyle + disabledStyle + brokenStyle%>">
                                         <input  <%=disabled%> value="<%=places.get(j).getId()%>" style="margin-right: 19px" class="form-check-input" type="checkbox"  name="checkedPlaces"/><%=places.get(j).getNumeroPlace()%>
                                     </td>
                                     <% }

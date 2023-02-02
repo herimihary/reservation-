@@ -14,6 +14,7 @@ public class Place  implements Comparable<Place>{
    private int  idClasse;
    private boolean isDanger;
    private boolean isDisponible;
+   private boolean isBroked;
 
     public int getId() {
         return id;
@@ -57,12 +58,22 @@ public class Place  implements Comparable<Place>{
         this.isDisponible = isDisponible;
     }
 
+    public boolean isIsBroked() {
+        return isBroked;
+    }
+
+    public void setIsBroked(boolean isBroked) {
+        this.isBroked = isBroked;
+    }
+    
     @Override
     public int compareTo(Place o) {
         String a = String.valueOf(this.getNumeroPlace().charAt(0));
         String b = String.valueOf(o.getNumeroPlace().charAt(0));
         return this.id - o.getId();
     }
+
+    
     
     
 
